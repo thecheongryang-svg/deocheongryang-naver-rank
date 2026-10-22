@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>더청량 네이버 순위 대시보드</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --surface-2: #232321;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --gridline: #2c2c2a;
+    --baseline: #383835;
+    --series: #3987e5;
+    --series-dim: #2c4a6e;
+    --good: #0ca30c;
+    --critical: #e66767;
+    --border: rgba(255,255,255,0.08);
+    --accent-orange: #d95926;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 32px 28px 64px;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; }
+
+  header.top {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 28px; gap: 16px; flex-wrap: wrap;
+  }
+  h1 { font-size: 22px; font-weight: 600; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .subtitle { color: var(--text-secondary); font-size: 13px; }
+  .updated { color: var(--text-muted); font-size: 12px; margin-top: 4px; }
+
+  .status-badge {
+    background: var(--surface); color: var(--text-secondary); border: 1px solid var(--border);
+    border-radius: 999px; padding: 8px 14px; font-size: 12.5px;
+  }
+
+  section { margin-bottom: 40px; }
+  h2.section-title {
+    font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em;
+    color: var(--text-muted); margin: 0 0 14px;
+  }
+
+  .tiles {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
+  }
+  .tile {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .tile .label { font-size: 12.5px; color: var(--text-secondary); margin-bottom: 10px; }
+  .tile .value-row { display: flex; align-items: baseline; gap: 8px; }
+  .tile .value { font-size: 32px; font-weight: 600; line-height: 1; }
+  .tile .unit { font-size: 13px; color: var(--text-muted); }
+  .tile .delta { font-size: 12.5px; font-weight: 600; margin-top: 8px; }
+  .tile .delta.up { color: var(--good); }
+  .tile .delta.down { color: var(--critical); }
+  .tile .delta.flat { color: var(--text-muted); }
+  .tile .spark { margin-top: 10px; }
+  .tile .miss { color: var(--critical); font-size: 20px; font-weight: 600; }
+
+  .charts-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+  }
+  .chart-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px 18px 10px;
+  }
+  .chart-card .chart-title { font-size: 13.5px; font-weight: 600; margin-bottom: 2px; }
+  .chart-card .chart-sub { font-size: 11.5px; color: var(--text-muted); margin-bottom: 8px; }
+  .empty-note { font-size: 12.5px; color: var(--text-muted); padding: 24px 0; text-align: center; }
+
+  .tooltip {
+    position: absolute; pointer-events: none; background: var(--surface-2);
+    border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px;
+    font-size: 11.5px; color: var(--text-primary); white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0,0,0,.4); opacity: 0; transition: opacity .1s;
+  }
+
+  table.comp {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+  }
+  table.comp th {
+    text-align: left; font-weight: 600; color: var(--text-muted); font-size: 11.5px;
+    text-transform: uppercase; letter-spacing: .03em; padding: 8px 10px;
+    border-bottom: 1px solid var(--gridline);
+  }
+  table.comp td {
+    padding: 8px 10px; border-bottom: 1px solid var(--gridline);
+    font-variant-numeric: tabular-nums; color: var(--text-secondary);
+  }
+  table.comp td.name { color: var(--text-primary); font-variant-numeric: normal; }
+  table.comp tr.target td { background: rgba(57,135,229,0.12); color: #fff; font-weight: 600; }
+  table.comp tr.target td.name::after { content: " ← 더청량"; color: var(--series); font-weight: 600; }
+
+  .comp-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px 18px 6px; margin-bottom: 14px;
+  }
+  .comp-card .comp-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+  .comp-card .comp-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
+  .table-scroll { overflow-x: auto; }
+
+  .insight-box {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px 20px; font-size: 13.5px; line-height: 1.75; color: var(--text-secondary);
+  }
+  .insight-box ul { margin: 8px 0 0; padding-left: 18px; }
+  .insight-box li { margin-bottom: 8px; }
+  .insight-box strong { color: var(--text-primary); }
+  .tag {
+    display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px;
+    border-radius: 100px; background: rgba(217,89,38,0.16); color: #ff9a6b; margin-left: 6px;
+  }
+
+  footer { color: var(--text-muted); font-size: 12px; margin-top: 50px; line-height: 1.8; }
+  footer code { background: var(--surface-2); padding: 1px 6px; border-radius: 4px; }
+  footer a { color: var(--series); }
+
+  .kw-manager {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .kw-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; min-height: 30px; }
+  .kw-chip {
+    display: inline-flex; align-items: center;
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 100px;
+    padding: 6px 14px; font-size: 13px; color: var(--text-primary);
+  }
+  .kw-empty { color: var(--text-muted); font-size: 12.5px; }
+  .kw-edit-hint { font-size: 11.5px; color: var(--text-muted); padding-top: 10px; border-top: 1px dashed var(--gridline); }
+  .kw-edit-hint a { color: var(--series); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>더청량 네이버 플레이스 순위</h1>
+      <div class="subtitle">광고 제외 · 매일 오전 9시 GitHub Actions로 자동 기록</div>
+      <div class="updated" id="updatedAt">불러오는 중...</div>
+    </div>
+    <div class="status-badge">📡 GitHub Pages · 어디서나 접속 가능</div>
+  </header>
+
+  <section>
+    <h2 class="section-title">추적 키워드</h2>
+    <div class="kw-manager">
+      <div class="kw-chips" id="kwChips"></div>
+      <div class="kw-edit-hint">키워드를 추가/삭제하려면 저장소의 <code>keywords.txt</code> 파일을 수정해주세요 — 다음 자동 실행 때부터 반영됩니다. (<a id="kwEditLink" href="#" target="_blank">keywords.txt 바로 편집</a>)</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">현재 순위</h2>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section>
+    <h2 class="section-title">순위 추이</h2>
+    <div class="charts-grid" id="charts"></div>
+  </section>
+
+  <section>
+    <h2 class="section-title">경쟁사 비교 분석 <span class="tag">실측 데이터</span></h2>
+    <div id="compCards"></div>
+  </section>
+
+  <section>
+    <h2 class="section-title">순위에 영향을 주는 요소</h2>
+    <div class="insight-box">
+      <p><strong>실측 데이터로 확인된 패턴</strong></p>
+      <ul>
+        <li><strong>리뷰 수 ≠ 순위.</strong> "청량리술집" 키워드에서 더청량은 방문자 리뷰 159개로 1위인 반면, 같은 거리(610m)의 하나마토 청량리는 리뷰 1,687개(더청량의 약 10배)로도 3위에 머뭅니다. 리뷰 수는 참고 지표일 뿐 직접적인 순위 결정 요인이 아닙니다.</li>
+        <li><strong>거리는 동률일 때 승부처.</strong> "청량리이자카야"에서는 리뷰 수가 비슷한 코테사키(163개·450m, 1위)와 더청량(159개·610m, 5위)이 거리 차이로 순위가 갈렸습니다. 다른 조건이 비슷하면 가까운 쪽이 유리합니다.</li>
+        <li><strong>키워드-카테고리 일치.</strong> "청량리맛집"처럼 업종 특성과 거리가 먼 범용 키워드에서는 더청량이 top 20 밖으로 밀려납니다(요리주점 업태 특성상 "맛집"보다 "술집/이자카야/포차" 계열 키워드에서 강세).</li>
+      </ul>
+      <p style="margin-top:14px"><strong>API로는 직접 안 보이지만 업계에서 검증된 요인 (2026 기준)</strong></p>
+      <ul>
+        <li><strong>행동 신호(저장·전화·길찾기 클릭).</strong> 네이버는 정보를 얼마나 채웠는지가 아니라 실제 이용자가 저장하기·전화걸기·길찾기를 누르는 "실질 상호작용" 지수를 핵심으로 봅니다.</li>
+        <li><strong>리뷰 품질과 최신성.</strong> 단순 개수보다 사진·글자수·구체성이 있는 리뷰, 그리고 최근에 달린 리뷰가 더 높게 반영됩니다. 오래된 리뷰만 쌓여 있으면 불리합니다.</li>
+        <li><strong>사장님 답글.</strong> 리뷰에 대한 답글과 응답 속도가 "활성도" 신호로 집계됩니다. 답글을 다는 업체가 가산점을 받습니다.</li>
+        <li><strong>정보 최신성.</strong> 메뉴·사진·공지사항을 자주 업데이트하는 업체가 "운영 중인 활성 매장"으로 인식됩니다.</li>
+        <li><strong>키워드 품질.</strong> 업체명·소개글에 키워드를 억지로 반복하는 건 효과가 없고 오히려 패널티 요인이 될 수 있습니다 — 소개글은 실제 업종/메뉴를 자연스럽게 설명하는 게 유리합니다.</li>
+      </ul>
+      <p style="margin-top:14px; color:var(--text-muted); font-size:12.5px">
+        참고: 네이버가 알고리즘 가중치를 공개하지 않아 위 실측 데이터는 상관관계이지 인과관계를 단정한 건 아닙니다. 다만 "리뷰 수가 적어도 저장·답글·최신성이 좋으면 이길 수 있다"는 방향성은 여러 사례에서 일관되게 나타납니다.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    매일 오전 9시(KST), GitHub Actions가 자동으로 <code>daily_check.py</code>를 실행해서 순위를 기록하고 이 페이지의 데이터를 갱신합니다 — 컴퓨터가 꺼져 있어도, 이 페이지를 안 열어도 계속 쌓입니다.<br/>
+    데이터는 <a id="repoLink" href="#" target="_blank">GitHub 저장소</a>에서 직접 확인·수정할 수 있어요.
+  </footer>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const REPO = 'thecheongryang-svg/deocheongryang-naver-rank';
+document.getElementById('repoLink').href = `https://github.com/${REPO}`;
+document.getElementById('kwEditLink').href = `https://github.com/${REPO}/edit/master/keywords.txt`;
+
+const tooltip = document.getElementById('tooltip');
+
+function showTooltip(x, y, html) {
+  tooltip.innerHTML = html;
+  tooltip.style.left = (x + 14) + 'px';
+  tooltip.style.top = (y - 10) + 'px';
+  tooltip.style.opacity = '1';
+}
+function hideTooltip() { tooltip.style.opacity = '0'; }
+
+function fmtDate(s) {
+  // "2026-10-09 23:14" -> "10/9"
+  const d = s.split(' ')[0].split('-');
+  return `${parseInt(d[1])}/${parseInt(d[2])}`;
+}
+
+// 하루에 여러 번 찍힌 기록은 그날의 마지막(가장 최근) 값만 사용
+function dailySeries(rows) {
+  const byDate = {};
+  for (const r of rows) {
+    const date = r['조회일시'].split(' ')[0];
+    byDate[date] = r; // 뒤에 올수록 덮어써서 마지막 값이 남음
+  }
+  return Object.keys(byDate).sort().map(d => byDate[d]);
+}
+
+function renderSparkline(svgEl, ranks, w, h) {
+  const valid = ranks.filter(r => r !== null);
+  if (valid.length < 2) {
+    svgEl.innerHTML = '';
+    return;
+  }
+  const max = Math.max(...valid);
+  const min = Math.min(...valid);
+  const pad = 3;
+  const n = ranks.length;
+  const x = i => pad + (i / (n - 1)) * (w - pad * 2);
+  const y = r => {
+    if (r === null) return null;
+    if (max === min) return h / 2;
+    // 역순: 순위 1이 위로
+    return pad + ((r - min) / (max - min)) * (h - pad * 2);
+  };
+  let d = '';
+  ranks.forEach((r, i) => {
+    const yy = y(r);
+    if (yy === null) return;
+    d += (d === '' ? 'M' : 'L') + x(i).toFixed(1) + ',' + yy.toFixed(1) + ' ';
+  });
+  const lastIdx = [...ranks].reverse().findIndex(r => r !== null);
+  const lastI = lastIdx === -1 ? -1 : n - 1 - lastIdx;
+  let dot = '';
+  if (lastI >= 0) {
+    dot = `<circle cx="${x(lastI).toFixed(1)}" cy="${y(ranks[lastI]).toFixed(1)}" r="2.5" fill="var(--series)" />`;
+  }
+  svgEl.innerHTML = `<path d="${d.trim()}" fill="none" stroke="var(--series-dim)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />${dot}`;
+}
+
+function renderLineChart(container, series, dates) {
+  const w = container.clientWidth || 300;
+  const h = 150;
+  const padL = 30, padR = 14, padT = 14, padB = 22;
+  const plotW = w - padL - padR;
+  const plotH = h - padT - padB;
+
+  const validVals = series.map(s => s.rank).filter(r => r !== null);
+  if (validVals.length === 0) {
+    container.innerHTML = '<div class="empty-note">아직 데이터가 없습니다. 매일 자동 기록이 쌓이면 여기 표시됩니다.</div>';
+    return;
+  }
+  let max = Math.max(...validVals, 5);
+  let min = 1;
+  if (max === min) max = min + 4;
+  const n = series.length;
+
+  const x = i => padL + (n === 1 ? plotW / 2 : (i / (n - 1)) * plotW);
+  const y = r => padT + ((r - min) / (max - min)) * plotH; // 1위가 위
+
+  const gridLines = [];
+  const steps = Math.min(5, max - min + 1);
+  for (let s = 0; s <= steps; s++) {
+    const val = Math.round(min + (s / steps) * (max - min));
+    const yy = y(val);
+    gridLines.push(`<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${w - padR}" y2="${yy.toFixed(1)}" stroke="var(--gridline)" stroke-width="1" />`);
+    gridLines.push(`<text x="${padL - 6}" y="${(yy + 3.5).toFixed(1)}" text-anchor="end" font-size="10" fill="var(--text-muted)">${val}</text>`);
+  }
+
+  let path = '';
+  const dots = [];
+  series.forEach((s, i) => {
+    if (s.rank === null) return;
+    const xx = x(i), yy = y(s.rank);
+    path += (path === '' ? 'M' : 'L') + xx.toFixed(1) + ',' + yy.toFixed(1) + ' ';
+    dots.push({ x: xx, y: yy, date: dates[i], rank: s.rank, idx: i });
+  });
+
+  const xLabels = [];
+  const labelEvery = Math.max(1, Math.ceil(n / 6));
+  dates.forEach((d, i) => {
+    if (i % labelEvery === 0 || i === n - 1) {
+      xLabels.push(`<text x="${x(i).toFixed(1)}" y="${h - 4}" text-anchor="middle" font-size="10" fill="var(--text-muted)">${fmtDate(d + ' 0')}</text>`);
+    }
+  });
+
+  const dotEls = dots.map(d =>
+    `<circle data-i="${d.idx}" cx="${d.x.toFixed(1)}" cy="${d.y.toFixed(1)}" r="4" fill="var(--page)" stroke="var(--series)" stroke-width="2" style="cursor:pointer" />`
+  ).join('');
+
+  container.innerHTML = `
+    <svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+      ${gridLines.join('')}
+      <path d="${path.trim()}" fill="none" stroke="var(--series)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      ${dotEls}
+      ${xLabels.join('')}
+    </svg>`;
+
+  container.querySelectorAll('circle[data-i]').forEach(c => {
+    c.addEventListener('mouseenter', (e) => {
+      const i = parseInt(c.dataset.i);
+      const d = dots.find(dd => dd.idx === i);
+      const rect = container.getBoundingClientRect();
+      showTooltip(rect.left + d.x + window.scrollX, rect.top + d.y + window.scrollY,
+        `<strong>${d.date}</strong><br/>${d.rank}위`);
+    });
+    c.addEventListener('mouseleave', hideTooltip);
+  });
+}
+
+function deltaInfo(curr, prev) {
+  if (curr === null) return { cls: 'flat', text: '노출 안 됨' };
+  if (prev === null || prev === undefined) return { cls: 'flat', text: '전일 기록 없음' };
+  const diff = prev - curr; // 양수면 순위 상승(좋음)
+  if (diff > 0) return { cls: 'up', text: `▲ ${diff} 상승 (전일 ${prev}위)` };
+  if (diff < 0) return { cls: 'down', text: `▼ ${-diff} 하락 (전일 ${prev}위)` };
+  return { cls: 'flat', text: '전일과 동일' };
+}
+
+async function loadDashboard() {
+  const [history, keywords] = await Promise.all([
+    fetch('data/history.json').then(r => r.json()),
+    fetch('data/keywords.json').then(r => r.json()),
+  ]);
+
+  const kwChipsEl = document.getElementById('kwChips');
+  kwChipsEl.innerHTML = keywords.length
+    ? keywords.map(kw => `<span class="kw-chip">${kw}</span>`).join('')
+    : '<span class="kw-empty">추적 중인 키워드가 없습니다.</span>';
+
+  const tilesEl = document.getElementById('tiles');
+  const chartsEl = document.getElementById('charts');
+  tilesEl.innerHTML = '';
+  chartsEl.innerHTML = '';
+
+  let latestTime = '';
+  const perKeyword = [];
+
+  // 1단계: 카드를 전부 DOM에 먼저 붙인다 (그리드 레이아웃이 자리잡기 전에
+  // clientWidth를 재면 카드마다 다른 열 개수 기준으로 잘못 측정되기 때문)
+  for (const kw of keywords) {
+    const rows = history.filter(r => r['키워드'] === kw);
+    const daily = dailySeries(rows);
+    const ranks = daily.map(r => r['순위'] ? parseInt(r['순위']) : null);
+    const dates = daily.map(r => r['조회일시'].split(' ')[0]);
+    if (rows.length && rows[rows.length - 1]['조회일시'] > latestTime) {
+      latestTime = rows[rows.length - 1]['조회일시'];
+    }
+
+    const curr = ranks.length ? ranks[ranks.length - 1] : null;
+    const prev = ranks.length > 1 ? ranks[ranks.length - 2] : null;
+    const d = deltaInfo(curr, prev);
+
+    const tile = document.createElement('div');
+    tile.className = 'tile';
+    tile.dataset.kw = kw;
+    tile.innerHTML = `
+      <div class="label">${kw}</div>
+      <div class="value-row">
+        ${curr !== null
+          ? `<div class="value">${curr}</div><div class="unit">위</div>`
+          : `<div class="miss">미노출</div>`}
+      </div>
+      <div class="delta ${d.cls}">${d.text}</div>
+      <div class="spark"><svg class="sparksvg" width="100%" height="28" viewBox="0 0 150 28" preserveAspectRatio="none"></svg></div>
+    `;
+    tilesEl.appendChild(tile);
+
+    const card = document.createElement('div');
+    card.className = 'chart-card';
+    card.innerHTML = `
+      <div class="chart-title">${kw}</div>
+      <div class="chart-sub">일별 순위 (낮을수록 상위)</div>
+      <div class="chart-container"></div>
+    `;
+    chartsEl.appendChild(card);
+
+    perKeyword.push({ tile, card, ranks, dates });
+  }
+
+  // 2단계: 그리드가 자리잡은 뒤(레이아웃 완료 후) 실제 폭을 재서 차트를 그린다
+  for (const { tile, card, ranks, dates } of perKeyword) {
+    renderSparkline(tile.querySelector('.sparksvg'), ranks, 150, 28);
+    renderLineChart(card.querySelector('.chart-container'),
+      ranks.map(r => ({ rank: r })), dates);
+  }
+
+  document.getElementById('updatedAt').textContent = latestTime
+    ? `마지막 기록: ${latestTime}` : '아직 기록이 없어요. 첫 GitHub Actions 실행을 기다려주세요.';
+}
+
+async function loadCompetitors() {
+  const data = await fetch('data/competitors.json').then(r => r.json());
+  const el = document.getElementById('compCards');
+  el.innerHTML = '';
+  for (const [kw, info] of Object.entries(data)) {
+    const top10 = info.rows.slice(0, 10);
+    const card = document.createElement('div');
+    card.className = 'comp-card';
+    const rankText = info.targetRank ? `${info.targetRank}위` : 'top 20 밖';
+    card.innerHTML = `
+      <div class="comp-title">"${kw}" 상위 10개 업체</div>
+      <div class="comp-sub">더청량 ${rankText} · 더청량보다 위에 있는 업체 평균 방문자리뷰 ${info.avgReviewAbove}개</div>
+      <div class="table-scroll">
+      <table class="comp">
+        <thead><tr><th>순위</th><th>업체명</th><th>방문자리뷰</th><th>블로그리뷰</th><th>사진</th><th>거리</th></tr></thead>
+        <tbody>
+          ${top10.map(r => `
+            <tr class="${r.isTarget ? 'target' : ''}">
+              <td>${r.rank}</td>
+              <td class="name">${r.name}</td>
+              <td>${r.visitorReview.toLocaleString()}</td>
+              <td>${r.blogReview.toLocaleString()}</td>
+              <td>${r.imageCount}</td>
+              <td>${r.distance}</td>
+            </tr>`).join('')}
+        </tbody>
+      </table>
+      </div>
+    `;
+    el.appendChild(card);
+  }
+}
+
+loadDashboard();
+loadCompetitors();
+</script>
+</body>
+</html>
