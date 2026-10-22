@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+server_log.txt
+daily_run.log
+search_volume_cache.json

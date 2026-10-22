@@ -1,0 +1,548 @@
+{
+  "청량리술집": [
+    {
+      "id": "2055061859",
+      "name": "더청량 본점",
+      "category": "요리주점",
+      "visitorReviewCount": "159",
+      "blogCafeReviewCount": "10",
+      "imageCount": 8,
+      "distance": "610m"
+    },
+    {
+      "id": "1591793540",
+      "name": "짱구네 심야식당",
+      "category": "요리주점",
+      "visitorReviewCount": "200",
+      "blogCafeReviewCount": "154",
+      "imageCount": 11,
+      "distance": "500m"
+    },
+    {
+      "id": "1428615403",
+      "name": "하나마토 청량리",
+      "category": "요리주점",
+      "visitorReviewCount": "1,687",
+      "blogCafeReviewCount": "177",
+      "imageCount": 14,
+      "distance": "610m"
+    },
+    {
+      "id": "1286248876",
+      "name": "청량0408",
+      "category": "술집",
+      "visitorReviewCount": "46",
+      "blogCafeReviewCount": "96",
+      "imageCount": 14,
+      "distance": "460m"
+    },
+    {
+      "id": "1357945209",
+      "name": "한사발포차 청량리점",
+      "category": "요리주점",
+      "visitorReviewCount": "1,401",
+      "blogCafeReviewCount": "240",
+      "imageCount": 10,
+      "distance": "590m"
+    },
+    {
+      "id": "1377597720",
+      "name": "일관",
+      "category": "이자카야",
+      "visitorReviewCount": "471",
+      "blogCafeReviewCount": "112",
+      "imageCount": 12,
+      "distance": "640m"
+    },
+    {
+      "id": "1187747809",
+      "name": "청량호프 누룽지통닭",
+      "category": "맥주,호프",
+      "visitorReviewCount": "796",
+      "blogCafeReviewCount": "30",
+      "imageCount": 48,
+      "distance": "420m"
+    },
+    {
+      "id": "2056596285",
+      "name": "느린마을양조장 청량리역점",
+      "category": "요리주점",
+      "visitorReviewCount": "120",
+      "blogCafeReviewCount": "56",
+      "imageCount": 4,
+      "distance": "280m"
+    },
+    {
+      "id": "1875756148",
+      "name": "화야",
+      "category": "요리주점",
+      "visitorReviewCount": "282",
+      "blogCafeReviewCount": "77",
+      "imageCount": 23,
+      "distance": "340m"
+    },
+    {
+      "id": "2039545900",
+      "name": "생활맥주 청량리점",
+      "category": "맥주,호프",
+      "visitorReviewCount": "128",
+      "blogCafeReviewCount": "20",
+      "imageCount": 5,
+      "distance": "400m"
+    },
+    {
+      "id": "1038414907",
+      "name": "제주미향해장 본점",
+      "category": "해장국",
+      "visitorReviewCount": "5,848",
+      "blogCafeReviewCount": "818",
+      "imageCount": 40,
+      "distance": "440m"
+    },
+    {
+      "id": "19885746",
+      "name": "원조 골뱅이 전문점",
+      "category": "포장마차",
+      "visitorReviewCount": "896",
+      "blogCafeReviewCount": "520",
+      "imageCount": 3,
+      "distance": "350m"
+    },
+    {
+      "id": "18085581",
+      "name": "골뱅이나라 청량리역1호점",
+      "category": "술집",
+      "visitorReviewCount": "785",
+      "blogCafeReviewCount": "152",
+      "imageCount": 9,
+      "distance": "270m"
+    },
+    {
+      "id": "1426956356",
+      "name": "코테사키",
+      "category": "이자카야",
+      "visitorReviewCount": "163",
+      "blogCafeReviewCount": "89",
+      "imageCount": 7,
+      "distance": "450m"
+    },
+    {
+      "id": "1917934979",
+      "name": "량리",
+      "category": "이자카야",
+      "visitorReviewCount": "125",
+      "blogCafeReviewCount": "40",
+      "imageCount": 12,
+      "distance": "300m"
+    },
+    {
+      "id": "1301107820",
+      "name": "청과포차",
+      "category": "포장마차",
+      "visitorReviewCount": "56",
+      "blogCafeReviewCount": "61",
+      "imageCount": 1,
+      "distance": "550m"
+    },
+    {
+      "id": "11763327",
+      "name": "투다리 전농2점",
+      "category": "오뎅,꼬치",
+      "visitorReviewCount": "143",
+      "blogCafeReviewCount": "23",
+      "imageCount": 7,
+      "distance": "330m"
+    },
+    {
+      "id": "1918664756",
+      "name": "노가리슈퍼",
+      "category": "요리주점",
+      "visitorReviewCount": "63",
+      "blogCafeReviewCount": "21",
+      "imageCount": 1,
+      "distance": "340m"
+    },
+    {
+      "id": "1481768434",
+      "name": "오복치킨 본점",
+      "category": "치킨,닭강정",
+      "visitorReviewCount": "425",
+      "blogCafeReviewCount": "41",
+      "imageCount": 9,
+      "distance": "310m"
+    },
+    {
+      "id": "2085506993",
+      "name": "혼키 청량리점",
+      "category": "이자카야",
+      "visitorReviewCount": "7",
+      "blogCafeReviewCount": "6",
+      "imageCount": 1,
+      "distance": "440m"
+    }
+  ],
+  "청량리맛집": [
+    {
+      "id": "1226072908",
+      "name": "봄담아 청량리점",
+      "category": "샤브샤브",
+      "visitorReviewCount": "4,935",
+      "blogCafeReviewCount": "337",
+      "imageCount": 42,
+      "distance": "570m"
+    },
+    {
+      "id": "1615058794",
+      "name": "청량리조개구이찜",
+      "category": "조개요리",
+      "visitorReviewCount": "843",
+      "blogCafeReviewCount": "423",
+      "imageCount": 14,
+      "distance": "380m"
+    },
+    {
+      "id": "37374003",
+      "name": "애슐리퀸즈 롯데백화점 청량리점",
+      "category": "패밀리레스토랑",
+      "visitorReviewCount": "5,426",
+      "blogCafeReviewCount": "880",
+      "imageCount": 12,
+      "distance": "90m"
+    },
+    {
+      "id": "2024314180",
+      "name": "남후아힌 청량리직영점",
+      "category": "태국음식",
+      "visitorReviewCount": "890",
+      "blogCafeReviewCount": "122",
+      "imageCount": 20,
+      "distance": "220m"
+    },
+    {
+      "id": "1038414907",
+      "name": "제주미향해장 본점",
+      "category": "해장국",
+      "visitorReviewCount": "5,848",
+      "blogCafeReviewCount": "818",
+      "imageCount": 40,
+      "distance": "440m"
+    },
+    {
+      "id": "1054679961",
+      "name": "신홍러우 롯데백화점 청량리점",
+      "category": "중식당",
+      "visitorReviewCount": "2,476",
+      "blogCafeReviewCount": "209",
+      "imageCount": 9,
+      "distance": "100m"
+    },
+    {
+      "id": "1293423427",
+      "name": "독립밀방 청량리",
+      "category": "양식",
+      "visitorReviewCount": "6,451",
+      "blogCafeReviewCount": "10,883",
+      "imageCount": 40,
+      "distance": "60m"
+    },
+    {
+      "id": "1569366424",
+      "name": "황해도순대",
+      "category": "순대,순댓국",
+      "visitorReviewCount": "1,012",
+      "blogCafeReviewCount": "363",
+      "imageCount": 6,
+      "distance": "390m"
+    },
+    {
+      "id": "1658816620",
+      "name": "로운 샤브샤브 청량리점",
+      "category": "샤브샤브",
+      "visitorReviewCount": "3,590",
+      "blogCafeReviewCount": "702",
+      "imageCount": 7,
+      "distance": "70m"
+    },
+    {
+      "id": "1119334890",
+      "name": "다이닝원 청량리점",
+      "category": "일식,초밥뷔페",
+      "visitorReviewCount": "1,422",
+      "blogCafeReviewCount": "642",
+      "imageCount": 14,
+      "distance": "540m"
+    },
+    {
+      "id": "2041726381",
+      "name": "커피한약방 청량리점",
+      "category": "카페,디저트",
+      "visitorReviewCount": "59",
+      "blogCafeReviewCount": "173",
+      "imageCount": 7,
+      "distance": "460m"
+    },
+    {
+      "id": "1788188816",
+      "name": "더몰트하우스 청량리역점",
+      "category": "이탈리아음식",
+      "visitorReviewCount": "3,294",
+      "blogCafeReviewCount": "727",
+      "imageCount": 75,
+      "distance": "480m"
+    },
+    {
+      "id": "2059657975",
+      "name": "암파스타레 롯데백화점 청량리점",
+      "category": "양식",
+      "visitorReviewCount": "818",
+      "blogCafeReviewCount": "89",
+      "imageCount": 117,
+      "distance": "90m"
+    },
+    {
+      "id": "1673887850",
+      "name": "아웃백스테이크하우스 청량리역사점",
+      "category": "패밀리레스토랑",
+      "visitorReviewCount": "1,514",
+      "blogCafeReviewCount": "458",
+      "imageCount": 3,
+      "distance": "50m"
+    },
+    {
+      "id": "1937057234",
+      "name": "호감해장",
+      "category": "해장국",
+      "visitorReviewCount": "7,756",
+      "blogCafeReviewCount": "595",
+      "imageCount": 10,
+      "distance": "370m"
+    },
+    {
+      "id": "1555336463",
+      "name": "스타벅스 청량리역사점",
+      "category": "카페",
+      "visitorReviewCount": "6,810",
+      "blogCafeReviewCount": "287",
+      "imageCount": 2,
+      "distance": "60m"
+    },
+    {
+      "id": "1646117324",
+      "name": "더노벰버라운지 청량리점",
+      "category": "카페,디저트",
+      "visitorReviewCount": "801",
+      "blogCafeReviewCount": "100",
+      "imageCount": 27,
+      "distance": "550m"
+    },
+    {
+      "id": "1089055248",
+      "name": "상화정",
+      "category": "한식",
+      "visitorReviewCount": "4,174",
+      "blogCafeReviewCount": "453",
+      "imageCount": 18,
+      "distance": "400m"
+    },
+    {
+      "id": "37547083",
+      "name": "남원통닭 본관",
+      "category": "치킨,닭강정",
+      "visitorReviewCount": "1,948",
+      "blogCafeReviewCount": "1,125",
+      "imageCount": 9,
+      "distance": "490m"
+    },
+    {
+      "id": "2040740985",
+      "name": "춘리마라탕 청량리역점",
+      "category": "마라탕",
+      "visitorReviewCount": "808",
+      "blogCafeReviewCount": "340",
+      "imageCount": 18,
+      "distance": "440m"
+    }
+  ],
+  "청량리이자카야": [
+    {
+      "id": "1426956356",
+      "name": "코테사키",
+      "category": "이자카야",
+      "visitorReviewCount": "163",
+      "blogCafeReviewCount": "89",
+      "imageCount": 7,
+      "distance": "450m"
+    },
+    {
+      "id": "1428615403",
+      "name": "하나마토 청량리",
+      "category": "요리주점",
+      "visitorReviewCount": "1,687",
+      "blogCafeReviewCount": "177",
+      "imageCount": 14,
+      "distance": "610m"
+    },
+    {
+      "id": "1377597720",
+      "name": "일관",
+      "category": "이자카야",
+      "visitorReviewCount": "471",
+      "blogCafeReviewCount": "112",
+      "imageCount": 12,
+      "distance": "640m"
+    },
+    {
+      "id": "1917934979",
+      "name": "량리",
+      "category": "이자카야",
+      "visitorReviewCount": "125",
+      "blogCafeReviewCount": "40",
+      "imageCount": 12,
+      "distance": "300m"
+    },
+    {
+      "id": "2055061859",
+      "name": "더청량 본점",
+      "category": "요리주점",
+      "visitorReviewCount": "159",
+      "blogCafeReviewCount": "10",
+      "imageCount": 8,
+      "distance": "610m"
+    },
+    {
+      "id": "1184251309",
+      "name": "아사쿠사",
+      "category": "일식당",
+      "visitorReviewCount": "512",
+      "blogCafeReviewCount": "119",
+      "imageCount": 4,
+      "distance": "470m"
+    },
+    {
+      "id": "2085506993",
+      "name": "혼키 청량리점",
+      "category": "이자카야",
+      "visitorReviewCount": "7",
+      "blogCafeReviewCount": "6",
+      "imageCount": 1,
+      "distance": "440m"
+    },
+    {
+      "id": "1936664393",
+      "name": "여울 다이닝",
+      "category": "이자카야",
+      "visitorReviewCount": "178",
+      "blogCafeReviewCount": "174",
+      "imageCount": 12,
+      "distance": "400m"
+    },
+    {
+      "id": "1875756148",
+      "name": "화야",
+      "category": "요리주점",
+      "visitorReviewCount": "282",
+      "blogCafeReviewCount": "77",
+      "imageCount": 23,
+      "distance": "340m"
+    },
+    {
+      "id": "2011089055",
+      "name": "울솔",
+      "category": "이자카야",
+      "visitorReviewCount": "34",
+      "blogCafeReviewCount": "10",
+      "imageCount": 4,
+      "distance": "680m"
+    },
+    {
+      "id": "1050979600",
+      "name": "청량회관",
+      "category": "요리주점",
+      "visitorReviewCount": "535",
+      "blogCafeReviewCount": "474",
+      "imageCount": 3,
+      "distance": "700m"
+    },
+    {
+      "id": "2059172030",
+      "name": "우도타코",
+      "category": "일식당",
+      "visitorReviewCount": "20",
+      "blogCafeReviewCount": "0",
+      "imageCount": 8,
+      "distance": "630m"
+    },
+    {
+      "id": "1486931509",
+      "name": "옹",
+      "category": "요리주점",
+      "visitorReviewCount": "188",
+      "blogCafeReviewCount": "71",
+      "imageCount": 4,
+      "distance": "650m"
+    },
+    {
+      "id": "1015685446",
+      "name": "명동이발관",
+      "category": "이자카야",
+      "visitorReviewCount": "127",
+      "blogCafeReviewCount": "116",
+      "imageCount": 4,
+      "distance": "640m"
+    },
+    {
+      "id": "1286348940",
+      "name": "피식",
+      "category": "일식당",
+      "visitorReviewCount": "242",
+      "blogCafeReviewCount": "138",
+      "imageCount": 30,
+      "distance": "660m"
+    },
+    {
+      "id": "2027585291",
+      "name": "사이쇼",
+      "category": "요리주점",
+      "visitorReviewCount": "294",
+      "blogCafeReviewCount": "222",
+      "imageCount": 82,
+      "distance": "810m"
+    },
+    {
+      "id": "1093408324",
+      "name": "오빠화이팅 답십리점",
+      "category": "이자카야",
+      "visitorReviewCount": "383",
+      "blogCafeReviewCount": "35",
+      "imageCount": 56,
+      "distance": "1.2km"
+    },
+    {
+      "id": "2090755074",
+      "name": "하마루 회기점",
+      "category": "이자카야",
+      "visitorReviewCount": "341",
+      "blogCafeReviewCount": "148",
+      "imageCount": 18,
+      "distance": "1.3km"
+    },
+    {
+      "id": "1989307100",
+      "name": "야키토리쿠루 회기점",
+      "category": "이자카야",
+      "visitorReviewCount": "424",
+      "blogCafeReviewCount": "317",
+      "imageCount": 115,
+      "distance": "1.3km"
+    },
+    {
+      "id": "1182347049",
+      "name": "훈",
+      "category": "이자카야",
+      "visitorReviewCount": "86",
+      "blogCafeReviewCount": "65",
+      "imageCount": 18,
+      "distance": "1.4km"
+    }
+  ]
+}
