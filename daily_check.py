@@ -3,6 +3,7 @@
 매일 자동으로 돌아가는 체크 스크립트. 인자 없이 keywords.txt에 적힌 키워드를 전부 조회해서
 순위기록.csv에 쌓는다. Windows 작업 스케줄러가 매일 이 스크립트를 실행한다.
 """
+import os
 import sys
 from datetime import datetime
 
@@ -10,7 +11,7 @@ import rank_core as rc
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-LOG_FILE = rc.BASE_DIR + "\\daily_run.log"
+LOG_FILE = os.path.join(rc.BASE_DIR, "daily_run.log")
 
 
 def log_line(msg):
